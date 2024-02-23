@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let SocialNetworks = [
+    { id: 0, name: 'instagram' },
+    { id: 1, name: 'facebook'},
+    { id: 2, name: 'WhatsApp'},
+    { id: 3, name: 'TikTok'},
+    { id: 4, name: 'Threads'},
+    { id: 5, name: 'telegram'},
+    { id: 6, name: 'vk'},
+];
+
+export default function List() {
+    const [networks, setNetworks] = useState(
+        SocialNetworks
+    );
+
+    return (
+        <>
+            <h1>Popular Social Networks</h1>
+            <ul>
+                {networks.map(network => (
+                    <li key={network.id}>
+                        {network.name}{' '}
+                        <button onClick={() => {
+                            setNetworks(
+                                networks.filter(a =>
+                                    a.id !== network.id
+                                )
+                            );
+                        }}>
+                            Delete
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
 }
-
-export default App;
